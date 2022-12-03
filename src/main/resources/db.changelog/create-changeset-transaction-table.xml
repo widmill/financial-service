@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+    <changeSet id="create_table_transaction" author="Ilya">
+        <createTable tableName="transaction">
+            <column autoIncrement="true" name="transaction_id" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="creation_date" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="amount" type="decimal">
+                <constraints nullable="false"/>
+            </column>
+            <column name="transaction_type" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="account_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="transaction_account_id_fkey"
+                             references="account(account_id)"/>
+            </column>
+            <column name="warrant_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="transaction_warrant_id_fkey"
+                             references="cash_warrant(warrant_id)"/>
+            </column>
+            <column name="initial_account_id" type="bigint">
+                <constraints nullable="true" foreignKeyName="transaction_initial_account_id_fkey"
+                             references="account(account_id)"/>
+            </column>
+            <column name="transaction_result" type="text">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
+

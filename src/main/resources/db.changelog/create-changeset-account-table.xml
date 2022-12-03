@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+    <changeSet id="create_table_account" author="Ilya">
+        <createTable tableName="account">
+            <column autoIncrement="true" name="account_id" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="client_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="account_number" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="amount" type="decimal"/>
+            <column name="account_type" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creation_date" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="valid_until" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addUniqueConstraint
+                tableName="account"
+                columnNames="account_number"
+                constraintName="unique_account_number"/>
+        <addForeignKeyConstraint baseColumnNames="client_id"
+                                 baseTableName="client"
+                                 constraintName="account_client_id_fkey"
+                                 referencedColumnNames="client_id"
+                                 referencedTableName="client"/>
+    </changeSet>
+</databaseChangeLog>
+

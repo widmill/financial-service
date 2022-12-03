@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+    <property name="now" value="now()" dbms="postgresql"/>
+    <changeSet id="insert-into-cash-warrant" author="Ilya">
+        <insert tableName="cash_warrant">
+            <column name="warrant_id" value="1"/>
+            <column name="warrant_type" value="0"/>
+            <column name="amount" value="100"/>
+            <column name="account_id" value="1"/>
+            <column name="warrant_result" value="Success"/>
+            <column name="creation_date" valueDate="${now}"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
+
